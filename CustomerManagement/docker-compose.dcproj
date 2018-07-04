@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>a371dccd-e68f-4586-b359-fde2f382bfbf</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/values</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/customer</DockerServiceUrl>
     <DockerServiceName>customermanagement</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
