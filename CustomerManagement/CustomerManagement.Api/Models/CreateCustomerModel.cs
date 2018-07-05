@@ -1,5 +1,8 @@
 ﻿namespace CustomerManagement.Api.Models
 {
+    /// <summary>
+    /// Model used to create a new customer.
+    /// </summary>
     public class CreateCustomerModel
     {
         public string Name { get; set; }
