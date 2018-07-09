@@ -4,7 +4,6 @@ using CustomerManagement.Api.Models;
 using CustomerManagement.Logic.Model;
 using CustomerManagement.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace CustomerManagement.Api.Controllers
 {
@@ -29,6 +28,11 @@ namespace CustomerManagement.Api.Controllers
             return title;
         }
 
+        /// <summary>
+        /// Creates a new customer object and save it in the database repository.
+        /// </summary>
+        /// <param name="model">Customer model</param>
+        /// <returns>Action result with Ok or Bad request response.</returns>
         [HttpGet("create")]
         public IActionResult Create(CreateCustomerModel model)
         {
@@ -50,6 +54,11 @@ namespace CustomerManagement.Api.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Checks if the secondary email is valid or not and returns the corresponding Result object.
+        /// </summary>
+        /// <param name="secondaryEmail">Customer secondary email</param>
+        /// <returns>Email result object</returns>
         private Result<Maybe<Email>> GetSecondaryEmail(string secondaryEmail)
         {
             if (secondaryEmail == null)
@@ -60,7 +69,12 @@ namespace CustomerManagement.Api.Controllers
             return Email.Create(secondaryEmail)
                 .Map(email => (Maybe<Email>)email);
         }
-        
+
+        /// <summary>
+        /// Returns the customer data associated to an ID.
+        /// </summary>
+        /// <param name="id">Customer ID</param>
+        /// <returns>Action result with HHTP OK and customer data, or Bad request response.</returns>
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
@@ -87,6 +101,11 @@ namespace CustomerManagement.Api.Controllers
             return Ok(model);
         }
 
+        /// <summary>
+        /// Disables email notification for a customer.
+        /// </summary>
+        /// <param name="id">Customer ID</param>
+        /// <returns>Action result with Ok or Bad request response.</returns>
         [HttpDelete("{id}/emailing")]
         public IActionResult DisableEmailing(long id)
         {
@@ -103,6 +122,11 @@ namespace CustomerManagement.Api.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Updates customer data in the database repository.
+        /// </summary>
+        /// <param name="model">Customer model</param>
+        /// <returns>Action result with HHTP OK and customer data, or Bad request response.</returns>
         [HttpPut("{id}")]
         public IActionResult Update(UpdateCustomerModel model)
         {
@@ -116,6 +140,11 @@ namespace CustomerManagement.Api.Controllers
                 .OnBoth(result => result.IsSuccess ? Ok() : Error(result.Error));
         }
 
+        /// <summary>
+        /// Promotes a customer to a higher status.
+        /// </summary>
+        /// <param name="id">Customer ID</param>
+        /// <returns>Action result with HHTP OK and customer data, or Bad request response.</returns>
         [HttpPost("{id}/promotion")]
         public IActionResult Promote(long id)
         {
